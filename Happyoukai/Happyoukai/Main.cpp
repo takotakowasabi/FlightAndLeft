@@ -7,13 +7,14 @@
 void Main()
 {
 	Window::Resize(WINDOW_WIDTH, WINDOW_HEIGHT);
-
-	MyApp manager(SceneManagerOption::ShowSceneName);
+	Graphics::SetBackground(Color(248));
+	//MyApp manager(SceneManagerOption::ShowSceneName);
 
 	//SceneManagerOption::ShowSceneName を外せばシーン名のデバッグ表示は消える
-	//MyApp manager;
+	MyApp manager;
 
 	// フェードイン・アウト時の色
+	manager.setFadeColor(Color(248));
 
 	// シーンを設定
 	manager.add<Title>(L"Title");

@@ -1,6 +1,8 @@
 #pragma once
 #include "Define.h"
 #include "Effect.h"
+# include "Graph.h"
+#include "RingMenu.h"
 #include <memory>
 
 class Title : public MyApp::Scene
@@ -14,5 +16,9 @@ public:
 
 	// –ˆƒtƒŒ[ƒ€ update() ‚ÌŸ‚ÉŒÄ‚Î‚ê‚é
 	void draw() const override;
+
 private:
+	std::unique_ptr<RingMenu> _ringMenu;
+	GraphManager _graphManager;
+	int32 fadeCount;
 };

@@ -8,7 +8,7 @@ const int WINDOW_HEIGHT = 480;
 
 struct GameData
 {
-	EffectManager _effectManager;;
+	EffectManager _effectManager;
 };
 
 // シーンのキーの型と、共有データの型を指定

@@ -8,8 +8,7 @@ public:
 	{
 		m_data->_effectManager.update();
 		if (Input::MouseL.clicked) {
-			m_data->_effectManager.fadeOut();
-			changeScene(L"Result", 0);
+			changeScene(L"Result", 100);
 		}
 	}
 
