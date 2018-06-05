@@ -79,6 +79,9 @@
     <Filter Include="リソース ファイル\images">
       <UniqueIdentifier>{2447d298-5770-47cf-93f5-9021336dfe66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Game">
+      <UniqueIdentifier>{773c479d-17f0-4ec6-a877-c771ab271b45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -104,6 +107,18 @@
     </ClCompile>
     <ClCompile Include="RingMenu.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>ソース ファイル\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>ソース ファイル\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>ソース ファイル\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +158,9 @@
       <Filter>リソース ファイル\Example\Well</Filter>
     </Image>
     <Image Include="images\title.png">
+      <Filter>リソース ファイル\images</Filter>
+    </Image>
+    <Image Include="images\Player.png">
       <Filter>リソース ファイル\images</Filter>
     </Image>
   </ItemGroup>
@@ -445,6 +463,21 @@
     </ClInclude>
     <ClInclude Include="RingMenu.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ソース ファイル\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>ソース ファイル\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>ソース ファイル\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>ソース ファイル\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="AddRequestListener.h">
+      <Filter>ソース ファイル\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

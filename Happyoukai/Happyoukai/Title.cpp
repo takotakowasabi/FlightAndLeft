@@ -26,7 +26,7 @@ void Title::init()
 	_ringMenu->addPart(L"third");
 	_ringMenu->addPart(L"forth");
 	_ringMenu->addPart(L"fifth");
-	_ringMenu->addPart(L"sixth");
+//	_ringMenu->addPart(L"sixth");
 }
 
 void Title::update()

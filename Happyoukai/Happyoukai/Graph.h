@@ -41,11 +41,17 @@ public:
 	void draw() const;
 
 	size_t add(Texture&& texture, Vec2&& upLeft, Vec2&& size, bool fade = false);
+	size_t addC(Texture&& texture, Vec2&& center, Vec2&& size, bool fade = false);
+	
+	void changeUpLeft(size_t num, Vec2 upLeft);
+	void changeCenter(size_t num, Vec2 center);
+	void moveUpLeft(size_t num, Vec2 deltaVector);
 	void fadeOut(size_t num);
 	void fadeIn(size_t num);
 	void flash(size_t num);
-	void move(size_t num, Vec2 vec2);
 
 private:
 	std::vector<std::shared_ptr<Graph>> _graphs;
 };
+
+using spGraphManager = std::shared_ptr<GraphManager>;

@@ -1,5 +1,6 @@
 #include "Graph.h"
 #include <algorithm>
+#include <utility>
 
 UpdateCountFunc::UpdateCountFunc(GraphCountFunc func) :
 	_count(0),
@@ -46,6 +47,31 @@ size_t GraphManager::add(Texture && texture, Vec2 && upLeft, Vec2 && size, bool 
 	return _graphs.size() - 1;
 }
 
+size_t GraphManager::addC(Texture && texture, Vec2 && center, Vec2 && size, bool fade)
+{
+	return add(
+		std::forward<Texture>(texture),
+		Vec2(center - size / 2),
+		std::forward<Vec2>(size),
+		fade
+	);
+}
+
+void GraphManager::changeUpLeft(size_t num, Vec2 upLeft)
+{
+	_graphs[num]->upLeft = upLeft;
+}
+
+void GraphManager::changeCenter(size_t num, Vec2 center)
+{
+	_graphs[num]->upLeft = center - _graphs[num]->size / 2;
+}
+
+void GraphManager::moveUpLeft(size_t num, Vec2 deltaVector)
+{
+	_graphs[num]->upLeft += deltaVector;
+}
+
 void GraphManager::fadeOut(size_t num)
 {
 	_graphs[num]->updateFuncs.push_back([](std::shared_ptr<Graph> graph) {
@@ -72,9 +98,4 @@ void GraphManager::flash(size_t num)
 		count += 17;
 		return true;
 	}));
-}
-
-void GraphManager::move(size_t num, Vec2 vec2)
-{
-	_graphs[num]->upLeft += vec2;
 }

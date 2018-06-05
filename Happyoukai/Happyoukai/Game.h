@@ -1,19 +1,19 @@
 #pragma once
 # include "Define.h"
+# include "Graph.h"
+#include "Player.h"
+#include "ObjectManager.h"
 
 class Game : public MyApp::Scene
 {
 public:
-	void update() override
-	{
-		m_data->_effectManager.update();
-		if (Input::MouseL.clicked) {
-			changeScene(L"Result", 100);
-		}
-	}
+	void init() override;
 
-	void draw() const override
-	{
+	void update() override;
 
-	}
+	void draw() const override;
+
+private:
+	spGraphManager _spGraphManager;
+	std::shared_ptr<ObjectManager> _spObjectManager;
 };

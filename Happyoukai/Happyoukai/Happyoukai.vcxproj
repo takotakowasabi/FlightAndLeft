@@ -162,11 +162,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Custom.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="RingMenu.cpp" />
     <ClCompile Include="Title.cpp" />
@@ -185,6 +189,7 @@
     <Image Include="Example\Well\Well.jpg" />
     <Image Include="Example\Windmill.png" />
     <Image Include="Icon.ico" />
+    <Image Include="images\Player.png" />
     <Image Include="images\title.png" />
   </ItemGroup>
   <ItemGroup>
@@ -285,11 +290,16 @@
     <Font Include="Example\YomogiFont.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddRequestListener.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Custom.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Result.h" />
     <ClInclude Include="RingMenu.h" />
     <ClInclude Include="Title.h" />

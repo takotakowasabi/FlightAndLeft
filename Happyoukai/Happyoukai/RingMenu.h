@@ -29,6 +29,7 @@ public:
 private:
 	bool mouseInMenu();
 	int32 calcTransparrency(float theta);
+	float calcAddRoll(float theta, float rollAngle);
 	float calcRoll(float theta, float rollAngle);
 	float calcDifference();
 	bool isClicked();
@@ -36,11 +37,13 @@ private:
 	std::vector<spRingMenuPart> _parts;
 	Vec2 _leftUp;
 	Vec2 _size;
-	Font _font;
+//	Font _font;
+	Font _outline;
 
 	float _radius;
 	Vec2 _center;
 
-	float _nowAngle;
+	float _angleForLimit;
 	size_t _nowPart;
+	size_t _partSize;
 };
