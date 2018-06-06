@@ -5,11 +5,13 @@ const float Player::DEFAULT_RADIUS = static_cast<float>(WINDOW_WIDTH) / 160.0f;
 const float Player::DEFAULT_DELAY = 0.4f;
 const size_t Player::LIFE_MAX = 3;
 const float Player::MAX_SPEED = static_cast<float>(WINDOW_WIDTH) / 40.0f;
+const float Player::SHOOT_POSITION = static_cast<float>(WINDOW_WIDTH) / 80.0f;
 
 Player::Player(spGraphManager spGM, std::shared_ptr<AddRequestListner> addRequestListner) :
 	Object(Vec2(WINDOW_WIDTH / 2, WINDOW_HEIGHT * 3 / 4), DEFAULT_RADIUS, ObjectGroup::friendCharacter),
 	_moveDelay(DEFAULT_DELAY),
 	_life(LIFE_MAX),
+	_presseedCount(0),
 	_spGraphManager(spGM),
 	_addRequestListner(addRequestListner)
 {
@@ -54,10 +56,18 @@ void Player::move()
 
 void Player::shootBullet()
 {
-	if (Input::MouseL.pressedDuration % 5 == 1) {
+	if (Input::MouseL.pressed) {
+		_presseedCount++;
+		if (_presseedCount % 5 == 1) {
 		_addRequestListner->addObject(std::make_shared<Bullet>(
-			_position,
+			_position + Vec2(SHOOT_POSITION, 0),
 			ObjectGroup::friendObject
 			));
+		_addRequestListner->addObject(std::make_shared<Bullet>(
+			_position - Vec2(SHOOT_POSITION, 0),
+			ObjectGroup::friendObject
+			));
+		}
 	}
+	else _presseedCount = 0;
 }

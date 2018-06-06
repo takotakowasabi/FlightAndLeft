@@ -45,11 +45,14 @@ void ObjectManager::callDraw(const std::forward_list<spObject>& objList)
 
 void ObjectManager::collisionJudge()
 {
-
+	judgeLists(_friendObjects, _enemyCharacters);
+	judgeLists(_friendCharacters, _enemyCharacters);
+	judgeLists(_friendCharacters, _enemyObjects);
 }
 
 void ObjectManager::judgeLists(std::forward_list<spObject>& objList1, std::forward_list<spObject>& objList2)
 {
+	if (objList1.empty() | objList2.empty()) return;
 	std::for_each(objList1.begin(), objList2.end(), [&objList2](spObject spO1) {
 		std::for_each(objList2.begin(), objList2.end(), [&spO1](spObject spO2) {
 			double distance = spO1->getPosition().distanceFrom(spO2->getPosition());

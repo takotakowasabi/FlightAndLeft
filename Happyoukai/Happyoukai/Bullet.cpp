@@ -1,7 +1,7 @@
 #include "Bullet.h"
 
-const float Bullet::DEFAULT_RADIUS = 5.0;
-const Vec2 Bullet::DEFAULT_VELOCITY = Vec2(0.0, 5.0);
+const float Bullet::DEFAULT_RADIUS = 2.0;
+const Vec2 Bullet::DEFAULT_VELOCITY = Vec2(0.0, -10.0);
 const Color Bullet::DEFAULT_FRIEND_COLOR = Color(216, 216, 68);
 
 Bullet::Bullet(Vec2 position, ObjectGroup group, float radius, Vec2 velocity, Color color) :
