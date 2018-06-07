@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <Siv3D.hpp>
+#include "Field.h"
 
 enum class ObjectGroup {
 	friendObject,
@@ -16,7 +17,7 @@ using spObject = std::shared_ptr<Object>;
 class Object
 {
 public:
-	Object(Vec2 position, float radius, ObjectGroup group);
+	Object(Vec2 position, float radius, ObjectGroup group, spFieldSize _fieldSize);
 	virtual ~Object() = default;
 
 	virtual bool update() = 0;
@@ -32,10 +33,19 @@ public:
 	ObjectGroup getGroup() {
 		return _group;
 	}
+	bool isInvisible() {
+		return _invisibleFlag;
+	}
 
 protected:
 	Vec2 _position;
 	float _radius;
+	spFieldSize _spFieldSize;
+	bool _invisibleFlag;
+
+	bool isInFieldX();
+	bool isInFieldY();
+	bool isInField();
 
 private:
 	ObjectGroup _group;

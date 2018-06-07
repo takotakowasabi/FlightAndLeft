@@ -4,16 +4,14 @@
 #include "Bullet.h"
 #include "AddRequestListener.h"
 #include "Field.h"
+#include "EnemyParam.h"
 
-class Player : public Object{
+class Enemy : public Object {
 public:
 	static const float DEFAULT_RADIUS;
-	static const float DEFAULT_DELAY;
-	static const size_t LIFE_MAX;
-	static const float MAX_SPEED;
-	static const float SHOOT_POSITION;
+	static const size_t DEFAULT_LIFE_MAX;
 
-	Player(spGraphManager spGM, std::shared_ptr<AddRequestListner> addRequestListner, spFieldSize spFS);
+	Enemy(spGraphManager spGM, std::shared_ptr<AddRequestListner> addRequestListner, spFieldSize spFS, EnemyParam&& enemyParam);
 
 	bool update() override;
 	void draw() const override;
@@ -21,16 +19,15 @@ public:
 	void collision(const spObject) override;
 
 private:
-	float _moveDelay;
-
 	void move();
 	void shootBullet();
+
+	Vec2 _velocity;
 
 	int32 _life;
 	size_t _imageNum;
 
-	int32 _presseedCount;
-
 	spGraphManager _spGraphManager;
 	std::shared_ptr<AddRequestListner> _addRequestListner;
+
 };

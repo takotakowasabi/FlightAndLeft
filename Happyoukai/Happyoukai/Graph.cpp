@@ -15,12 +15,14 @@ bool UpdateCountFunc::operator()(std::shared_ptr<Graph> graph)
 
 void GraphManager::update()
 {
-	std::for_each(_graphs.begin(), _graphs.end(), [](std::shared_ptr<Graph> graph) {
+	auto result = std::remove_if(_graphs.begin(), _graphs.end(), [](std::shared_ptr<Graph> graph) {
 		auto newEnd = std::remove_if(graph->updateFuncs.begin(), graph->updateFuncs.end(), [graph](GraphFunc& gf) {
 			return !gf(graph);
 		});
 		graph->updateFuncs.erase(newEnd, graph->updateFuncs.end());
+		return graph->deleteFlag;
 	});
+	_graphs.erase(result, _graphs.end());
 }
 
 void GraphManager::draw() const
@@ -28,6 +30,7 @@ void GraphManager::draw() const
 	std::for_each(_graphs.begin(), _graphs.end(), [](std::shared_ptr<Graph> graph) {
 		graph->texture 
 			.resize(graph->size)
+			.rotate(Radians(graph->rotateAngle))
 			.draw(graph->upLeft, Alpha(graph->transparrency));
 	});
 }
@@ -44,6 +47,8 @@ size_t GraphManager::add(Texture && texture, Vec2 && upLeft, Vec2 && size, bool 
 		fadeIn(_graphs.size() - 1);
 	}
 	else spGraph->transparrency = 255;
+	spGraph->rotateAngle = 0;
+	spGraph->deleteFlag = false;
 	return _graphs.size() - 1;
 }
 
@@ -72,6 +77,16 @@ void GraphManager::moveUpLeft(size_t num, Vec2 deltaVector)
 	_graphs[num]->upLeft += deltaVector;
 }
 
+void GraphManager::rotate(size_t num, int32 deltaAngle)
+{
+	_graphs[num]->rotateAngle += deltaAngle;
+}
+
+void GraphManager::rotateAt(size_t num, int32 angle)
+{
+	_graphs[num]->rotateAngle = angle;
+}
+
 void GraphManager::fadeOut(size_t num)
 {
 	_graphs[num]->updateFuncs.push_back([](std::shared_ptr<Graph> graph) {
@@ -98,4 +113,9 @@ void GraphManager::flash(size_t num)
 		count += 17;
 		return true;
 	}));
+}
+
+void GraphManager::deleteGraph(size_t num)
+{
+	_graphs[num]->deleteFlag = true;
 }

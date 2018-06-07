@@ -10,6 +10,7 @@ public:
 	Bullet(
 		Vec2 position,
 		ObjectGroup group,
+		spFieldSize spFS,
 		float radius = DEFAULT_RADIUS,
 		Vec2 velocity = DEFAULT_VELOCITY,
 		Color color = DEFAULT_FRIEND_COLOR
@@ -24,4 +25,7 @@ private:
 	Vec2 _velocity;
 
 	Color _color;
+
+	bool _deadFlag;
+
 };

@@ -3,5 +3,5 @@
 
 class AddRequestListner {
 public:
-	virtual void addObject(spObject) = 0;
+	virtual spObject addObject(spObject) = 0;
 };

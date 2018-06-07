@@ -32,6 +32,8 @@ struct Graph {
 	Vec2 upLeft;
 	Vec2 size;
 	int32 transparrency;
+	int32 rotateAngle;
+	bool deleteFlag;
 	std::vector<GraphFunc> updateFuncs;
 };
 
@@ -46,9 +48,14 @@ public:
 	void changeUpLeft(size_t num, Vec2 upLeft);
 	void changeCenter(size_t num, Vec2 center);
 	void moveUpLeft(size_t num, Vec2 deltaVector);
+
+	void rotate(size_t num, int32 deltaAngle);
+	void rotateAt(size_t num, int32 angle);
+
 	void fadeOut(size_t num);
 	void fadeIn(size_t num);
 	void flash(size_t num);
+	void deleteGraph(size_t num);
 
 private:
 	std::vector<std::shared_ptr<Graph>> _graphs;

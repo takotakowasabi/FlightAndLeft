@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <forward_list>
+#include <list>
 #include "Object.h"
 #include "AddRequestListener.h"
 
@@ -10,17 +10,17 @@ public:
 	void update();
 	void draw() const;
 
-	void addObject(spObject) override;
+	spObject addObject(spObject) override;
 
 private:
-	static void callUpdate(std::forward_list<spObject>& objList);
-	static void callDraw(const std::forward_list<spObject>& objList);
+	static void callUpdate(std::list<spObject>& objList);
+	static void callDraw(const std::list<spObject>& objList);
 
 	void collisionJudge();
-	static void judgeLists(std::forward_list<spObject>& objList1, std::forward_list<spObject>& objList2);
+	static void judgeLists(std::list<spObject>& objList1, std::list<spObject>& objList2);
 
-	std::forward_list<spObject> _friendObjects;
-	std::forward_list<spObject> _friendCharacters;
-	std::forward_list<spObject> _enemyObjects;
-	std::forward_list<spObject> _enemyCharacters;
+	std::list<spObject> _friendObjects;
+	std::list<spObject> _friendCharacters;
+	std::list<spObject> _enemyObjects;
+	std::list<spObject> _enemyCharacters;
 };
