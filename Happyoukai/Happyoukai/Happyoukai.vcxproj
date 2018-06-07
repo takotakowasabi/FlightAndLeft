@@ -171,13 +171,18 @@
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="LifeViewer.cpp" />
+    <ClCompile Include="LimitTimer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Result.cpp" />
+    <ClCompile Include="ReturnTitle.cpp" />
     <ClCompile Include="RingMenu.cpp" />
+    <ClCompile Include="ScoreCounter.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
@@ -306,12 +311,18 @@
     <ClInclude Include="Field.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="LifeViewer.h" />
+    <ClInclude Include="LimitTimer.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Result.h" />
+    <ClInclude Include="ReturnTitle.h" />
     <ClInclude Include="RingMenu.h" />
+    <ClInclude Include="ScoreCounter.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="UIManager.h" />
+    <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

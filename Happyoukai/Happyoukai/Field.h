@@ -27,6 +27,9 @@ public:
 	const spFieldSize getSize() {
 		return _fieldSize;
 	}
+	const spFieldSize getGoalSize() {
+		return _goalFieldSize;
+	}
 
 private:
 	bool _transformFlag;

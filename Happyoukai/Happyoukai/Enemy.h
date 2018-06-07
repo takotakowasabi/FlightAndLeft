@@ -11,7 +11,7 @@ public:
 	static const float DEFAULT_RADIUS;
 	static const size_t DEFAULT_LIFE_MAX;
 
-	Enemy(spGraphManager spGM, std::shared_ptr<AddRequestListner> addRequestListner, spFieldSize spFS, EnemyParam&& enemyParam);
+	Enemy(spGraphManager spGM, std::shared_ptr<AddRequestListner> addRequestListner, spFieldSize spFS, std::shared_ptr<int32> score, EnemyParam&& enemyParam);
 
 	bool update() override;
 	void draw() const override;
@@ -29,5 +29,6 @@ private:
 
 	spGraphManager _spGraphManager;
 	std::shared_ptr<AddRequestListner> _addRequestListner;
+	std::shared_ptr<int32> _score;
 
 };

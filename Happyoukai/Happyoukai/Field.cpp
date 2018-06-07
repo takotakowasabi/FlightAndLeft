@@ -27,6 +27,7 @@ void Field::update()
 		deltaDR /= _transformCount;
 		_fieldSize->upLeft += deltaUL;
 		_fieldSize->downRight += deltaDR;
+		--_transformCount;
 	}
 }
 

@@ -19,6 +19,11 @@ public:
 	void draw() const override;
 
 	void collision(const spObject) override;
+	
+	void rotate(int32 count);
+	void rotateStart(const Vec2& goalVec);
+
+	const std::shared_ptr<int32> getLife();
 
 private:
 	float _moveDelay;
@@ -26,11 +31,15 @@ private:
 	void move();
 	void shootBullet();
 
-	int32 _life;
+	std::shared_ptr<int32> _life;
 	size_t _imageNum;
 
 	int32 _presseedCount;
 
 	spGraphManager _spGraphManager;
 	std::shared_ptr<AddRequestListner> _addRequestListner;
+
+	Vec2 _dirVec;
+	float _direction;
+	float _goalDirection;
 };
