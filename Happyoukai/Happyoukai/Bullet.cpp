@@ -25,7 +25,7 @@ void Bullet::draw() const
 
 void Bullet::collision(const spObject)
 {
-//	_deadFlag = true;
+	_deadFlag = true;
 }
 
 

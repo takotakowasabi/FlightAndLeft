@@ -165,9 +165,12 @@
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Cloud.cpp" />
     <ClCompile Include="Custom.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyBoss.cpp" />
+    <ClCompile Include="EnemyMaker.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graph.cpp" />
@@ -303,10 +306,13 @@
     <ClInclude Include="Arrow.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Cloud.h" />
     <ClInclude Include="Custom.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyBoss.h" />
+    <ClInclude Include="EnemyMaker.h" />
     <ClInclude Include="EnemyParam.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="Game.h" />

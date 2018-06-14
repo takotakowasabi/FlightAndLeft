@@ -19,6 +19,7 @@ private:
 	void collisionJudge();
 	static void judgeLists(std::list<spObject>& objList1, std::list<spObject>& objList2);
 
+	std::list<spObject> _neutralObjects;
 	std::list<spObject> _friendObjects;
 	std::list<spObject> _friendCharacters;
 	std::list<spObject> _enemyObjects;

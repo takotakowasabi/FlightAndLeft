@@ -20,7 +20,7 @@ void LimitTimer::update()
 void LimitTimer::draw() const
 {
 	_font(L"TIME").drawCenter(_position.x, _position.y - WINDOW_HEIGHT / 32, HSV(210, 0.53, 0.75));
-	_font(_limitMin, L" : ", _limitSec).drawCenter(_position.x, _position.y + WINDOW_HEIGHT / 32, HSV(177, 55, 100));
+	_font(Pad(_limitMin, { 2, L'0' }), L" : ", Pad(_limitSec, { 2, L'0' })).drawCenter(_position.x, _position.y + WINDOW_HEIGHT / 32, HSV(177, 55, 100));
 }
 
 void LimitTimer::transform(int32 count)

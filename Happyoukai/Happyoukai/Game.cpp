@@ -1,10 +1,11 @@
 #include "Game.h"
-#include "Enemy.h"
+#include "EnemyMaker.h"
 #include "Define.h"
 #include "ScoreCounter.h"
 #include "LifeViewer.h"
 #include "LimitTimer.h"
 #include "ReturnTitle.h"
+#include "Cloud.h"
 
 void Game::init()
 {
@@ -20,20 +21,47 @@ void Game::init()
 	_limitTime = std::make_shared<int32>(10800);
 	_returnTitleFlag = std::make_shared<bool>(false);
 
+	const int32 CLOUD_SIZE = 200;
+	for (int32 i = 0; i < CLOUD_SIZE; i++) {
+		_spObjectManager->addObject(std::make_shared<Cloud>(Vec2(Random(0, LOOP_FIELD_WIDTH), Random(0, LOOP_FIELD_HEIGHT)), _field->getSize(), _travelDirection));
+	}
+
 	_spPlayer = std::make_shared<Player>(_spObjectGraphManager, _spObjectManager, _field->getSize());
 	_spObjectManager->addObject(_spPlayer);
+
+	Texture bossText = Texture(L"images/Boss.png");
+	_spBoss = std::make_shared<EnemyBoss>(
+		_spObjectGraphManager, _spObjectManager, _field->getSize(), _score,
+		EnemyParam(
+			bossText,
+			//Vec2(Random(0, LOOP_FIELD_WIDTH), Random(WINDOW_HEIGHT, LOOP_FIELD_HEIGHT)),
+			Vec2(200, 2000),
+			Vec2(Random(0.0, 2.0), Random(-2.0, 2.0)),
+			*_travelDirection,
+			200U,
+			WINDOW_HEIGHT / 6
+		),
+		_travelDirection
+		);
+	_spObjectManager->addObject(_spBoss);
 
 	_uiManager.addUI(std::make_shared<ScoreCounter>(_score));
 	_uiManager.addUI(std::make_shared<LifeViewer>(_spPlayer->getLife()));
 	_uiManager.addUI(std::make_shared<LimitTimer>(_limitTime));
 	_uiManager.addUI(std::make_shared<ReturnTitle>(_returnTitleFlag));
 	
-	//debug
-	Vec2 enemyPos = Vec2(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
-	Vec2 enemyVel = Vec2(0, 0);
-	_spObjectManager->addObject(std::make_shared<Enemy>(
-		_spObjectGraphManager, _spObjectManager, _field->getSize(), _score, EnemyParam(enemyPos, enemyVel)));
-	//
+	const int32 ENEMY_SIZE = 100;
+	Texture text = Texture(L"images/Enemy.png");
+	for (int i = 0; i < ENEMY_SIZE; i++) {
+		_spObjectManager->addObject(std::make_shared<EnemyMaker>(
+			_spObjectGraphManager, _spObjectManager, _field->getSize(), _score,
+			EnemyParam(
+				text,
+				Vec2(Random(0, LOOP_FIELD_WIDTH), Random(0, LOOP_FIELD_HEIGHT)),
+				Vec2(Random(0.0, 2.0), Random(-2.0, 2.0))
+			),
+			_travelDirection));
+	}
 
 	Image fadeIn(WINDOW_WIDTH, WINDOW_HEIGHT, Color(248));
 	size_t fadeInNum = _spUIGraphManager->add(
@@ -47,7 +75,33 @@ void Game::init()
 
 void Game::update()
 {
-	if (*_returnTitleFlag) {
+	if (_goResultCount) {
+		if(_goResultCount == 85) changeScene(L"Result", 100);
+		++_goResultCount;
+	}
+	else if (*_spPlayer->getLife() <= 0 ||  _limitTime <= 0) {
+		m_data->_score = -*_score;
+		Image fadeIn(WINDOW_WIDTH, WINDOW_HEIGHT, Color(248));
+		_spUIGraphManager->add(
+			Texture(fadeIn),
+			Vec2(0, 0),
+			Vec2(WINDOW_WIDTH, WINDOW_HEIGHT),
+			true
+		);
+		++_goResultCount;
+	}
+	else if (!_spBoss->isBossLive()) {
+		m_data->_score = *_score;
+		Image fadeIn(WINDOW_WIDTH, WINDOW_HEIGHT, Color(248));
+		_spUIGraphManager->add(
+			Texture(fadeIn),
+			Vec2(0, 0),
+			Vec2(WINDOW_WIDTH, WINDOW_HEIGHT),
+			true
+		);
+		++_goResultCount;
+	}
+	else if (*_returnTitleFlag) {
 		if (_returnTitleCount == 85) changeScene(L"Title", 100);
 		else if (_returnTitleCount) ++_returnTitleCount;
 		else {

@@ -1,6 +1,7 @@
 #pragma once
 #include <Siv3D.hpp>
 #include <vector>
+#include <map>
 #include <memory>
 #include <functional>
 
@@ -58,7 +59,9 @@ public:
 	void deleteGraph(size_t num);
 
 private:
-	std::vector<std::shared_ptr<Graph>> _graphs;
+	int32 _count;
+	std::map<int32, std::shared_ptr<Graph>> _graphs;
 };
 
 using spGraphManager = std::shared_ptr<GraphManager>;
+using graphsPair = std::pair<int32, std::shared_ptr<Graph>>;

@@ -4,6 +4,7 @@
 #include "Field.h"
 
 enum class ObjectGroup {
+	neutral,
 	friendObject,
 	friendCharacter,
 	enemyObject,

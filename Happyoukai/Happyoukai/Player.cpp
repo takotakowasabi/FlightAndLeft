@@ -94,6 +94,7 @@ void Player::move()
 
 void Player::shootBullet()
 {
+	const float BULLET_RADIUS = WINDOW_HEIGHT / 240.f;
 	if (Input::MouseL.pressed) {
 		_presseedCount++;
 		if (_presseedCount % 5 == 1) {
@@ -102,14 +103,14 @@ void Player::shootBullet()
 					_position + Vec2(SHOOT_POSITION, 0),
 					ObjectGroup::friendObject,
 					_spFieldSize,
-					2.0,
+					BULLET_RADIUS,
 					(_dirVec * 10.0)
 					));
 				_addRequestListner->addObject(std::make_shared<Bullet>(
 					_position - Vec2(SHOOT_POSITION, 0),
 					ObjectGroup::friendObject,
 					_spFieldSize,
-					2.0,
+					BULLET_RADIUS,
 					(_dirVec * 10.0)
 					));
 			}
@@ -118,14 +119,14 @@ void Player::shootBullet()
 					_position + Vec2(0, SHOOT_POSITION),
 					ObjectGroup::friendObject,
 					_spFieldSize,
-					2.0,
+					BULLET_RADIUS,
 					(_dirVec * 10.0)
 					));
 				_addRequestListner->addObject(std::make_shared<Bullet>(
 					_position - Vec2(0, SHOOT_POSITION),
 					ObjectGroup::friendObject,
 					_spFieldSize,
-					2.0,
+					BULLET_RADIUS,
 					(_dirVec * 10.0)
 					));
 			}

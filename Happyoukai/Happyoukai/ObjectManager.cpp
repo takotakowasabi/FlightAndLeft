@@ -3,6 +3,7 @@
 
 void ObjectManager::update()
 {
+	callUpdate(_neutralObjects);
 	callUpdate(_friendObjects);
 	callUpdate(_friendCharacters);
 	callUpdate(_enemyObjects);
@@ -12,6 +13,7 @@ void ObjectManager::update()
 
 void ObjectManager::draw() const
 {
+	callDraw(_neutralObjects);
 	callDraw(_friendObjects);
 	callDraw(_friendCharacters);
 	callDraw(_enemyObjects);
@@ -21,6 +23,7 @@ void ObjectManager::draw() const
 spObject ObjectManager::addObject(spObject spO)
 {
 	switch (spO->getGroup()) {
+	case ObjectGroup::neutral: _neutralObjects.push_front(spO); break;
 	case ObjectGroup::friendObject: _friendObjects.push_front(spO); break;
 	case ObjectGroup::friendCharacter: _friendCharacters.push_front(spO); break;
 	case ObjectGroup::enemyObject: _enemyObjects.push_front(spO); break;

@@ -6,6 +6,7 @@
 #include "BackGround.h"
 #include "Arrow.h"
 #include "Player.h"
+#include "EnemyBoss.h"
 #include "UIManager.h"
 
 class Game : public MyApp::Scene
@@ -32,11 +33,13 @@ private:
 	Vec2 _directionCache;
 	std::shared_ptr<Vec2> _travelDirection;
 
+	std::shared_ptr<EnemyBoss> _spBoss;
 	std::shared_ptr<Player> _spPlayer;
 	TravelArrow _arrow;
 
 	int32 _tranformCount;
 	int32 _returnTitleCount;
+	int32 _goResultCount;
 
 	std::shared_ptr<int32> _score;
 	std::shared_ptr<int32> _limitTime;

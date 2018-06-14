@@ -15,41 +15,44 @@ bool UpdateCountFunc::operator()(std::shared_ptr<Graph> graph)
 
 void GraphManager::update()
 {
-	auto result = std::remove_if(_graphs.begin(), _graphs.end(), [](std::shared_ptr<Graph> graph) {
-		auto newEnd = std::remove_if(graph->updateFuncs.begin(), graph->updateFuncs.end(), [graph](GraphFunc& gf) {
-			return !gf(graph);
+	std::for_each(_graphs.begin(), _graphs.end(), [](std::pair<int32, std::shared_ptr<Graph> > graph) {
+		if (graph.second->deleteFlag) return;
+		auto graphSec = graph.second;
+		auto newEnd = std::remove_if(graph.second->updateFuncs.begin(), graph.second->updateFuncs.end(), [graphSec](GraphFunc& gf) {
+			return !gf(graphSec);
 		});
-		graph->updateFuncs.erase(newEnd, graph->updateFuncs.end());
-		return graph->deleteFlag;
+
+		graph.second->updateFuncs.erase(newEnd, graph.second->updateFuncs.end());
 	});
-	_graphs.erase(result, _graphs.end());
 }
 
 void GraphManager::draw() const
 {
-	std::for_each(_graphs.begin(), _graphs.end(), [](std::shared_ptr<Graph> graph) {
-		graph->texture 
-			.resize(graph->size)
-			.rotate(Radians(graph->rotateAngle))
-			.draw(graph->upLeft, Alpha(graph->transparrency));
+	std::for_each(_graphs.begin(), _graphs.end(), [](std::pair<int32, std::shared_ptr<Graph> > graph) {
+		if (graph.second->deleteFlag) return;
+		graph.second->texture 
+			.resize(graph.second->size)
+			.rotate(Radians(graph.second->rotateAngle))
+			.draw(graph.second->upLeft, Alpha(graph.second->transparrency));
 	});
 }
 
 size_t GraphManager::add(Texture && texture, Vec2 && upLeft, Vec2 && size, bool fade)
 {
-	_graphs.push_back(std::make_shared<Graph>());
-	std::shared_ptr<Graph> spGraph = _graphs.back();
+	_graphs.emplace(_count, std::make_shared<Graph>());
+	std::shared_ptr<Graph> spGraph = _graphs[_count];
 	spGraph->texture = texture;
 	spGraph->upLeft = upLeft;
 	spGraph->size = size;
 	if (fade) {
 		spGraph->transparrency = 0;
-		fadeIn(_graphs.size() - 1);
+		fadeIn(_count);
 	}
 	else spGraph->transparrency = 255;
 	spGraph->rotateAngle = 0;
 	spGraph->deleteFlag = false;
-	return _graphs.size() - 1;
+
+	return _count++;
 }
 
 size_t GraphManager::addC(Texture && texture, Vec2 && center, Vec2 && size, bool fade)
