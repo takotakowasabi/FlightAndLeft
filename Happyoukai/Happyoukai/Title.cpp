@@ -22,8 +22,8 @@ void Title::init()
 
 	_ringMenu = std::make_unique<RingMenu>(Vec2(WINDOW_WIDTH / 4, WINDOW_HEIGHT * 4 / 7), Vec2(WINDOW_WIDTH / 2, WINDOW_HEIGHT * 3 / 7));
 	_ringMenu->addPart(L"start");
-	_ringMenu->addPart(L"config");
-	_ringMenu->addPart(L"credit");
+//	_ringMenu->addPart(L"config");
+//	_ringMenu->addPart(L"credit");
 	_ringMenu->addPart(L"exit");
 }
 

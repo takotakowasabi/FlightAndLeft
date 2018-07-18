@@ -56,16 +56,16 @@ void Player::rotate(int32 count)
 void Player::rotateStart(const Vec2 & goalVec)
 {
 	_dirVec = goalVec;
-	if (goalVec.x == 1) {
+	if (abs(goalVec.x - 1) < 0.1) {
 		_goalDirection = 90.0f;
 	}
-	else if (goalVec.x == -1) {
+	else if (abs(goalVec.x + 1) < 0.1) {
 		_goalDirection = -90.0f;
 	}
-	else if (goalVec.y == 1) {
+	else if (abs(goalVec.y - 1) < 0.1) {
 		_goalDirection = 180.0f;
 	}
-	else if (goalVec.y == -1) {
+	else if (abs(goalVec.y + 1) < 0.1) {
 		_goalDirection = 0.0f;
 	}
 }

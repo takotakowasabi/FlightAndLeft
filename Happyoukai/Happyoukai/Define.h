@@ -6,8 +6,8 @@
 const int32 WINDOW_WIDTH = 960;
 const int32 WINDOW_HEIGHT = 720;
 
-const int32 LOOP_FIELD_WIDTH = 4800;
-const int32 LOOP_FIELD_HEIGHT = 3600;
+const int32 LOOP_FIELD_WIDTH = 2880;
+const int32 LOOP_FIELD_HEIGHT = 2160;
 
 const int32 CHANGE_DIRECTION_TIME = 60;
 

@@ -14,8 +14,8 @@ Field::Field(Vec2 upLeft, Vec2 downRight) :
 	_fieldSize->downRight = downRight;
 
 	_goalFieldSize = std::make_shared<FieldSize>();
-	_fieldSize->upLeft = upLeft;
-	_fieldSize->downRight = downRight;
+	_goalFieldSize->upLeft = upLeft;
+	_goalFieldSize->downRight = downRight;
 }
 
 void Field::update()

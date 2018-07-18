@@ -21,7 +21,7 @@ void Game::init()
 	_limitTime = std::make_shared<int32>(10800);
 	_returnTitleFlag = std::make_shared<bool>(false);
 
-	const int32 CLOUD_SIZE = 200;
+	const int32 CLOUD_SIZE = 100;
 	for (int32 i = 0; i < CLOUD_SIZE; i++) {
 		_spObjectManager->addObject(std::make_shared<Cloud>(Vec2(Random(0, LOOP_FIELD_WIDTH), Random(0, LOOP_FIELD_HEIGHT)), _field->getSize(), _travelDirection));
 	}
@@ -35,7 +35,7 @@ void Game::init()
 		EnemyParam(
 			bossText,
 			//Vec2(Random(0, LOOP_FIELD_WIDTH), Random(WINDOW_HEIGHT, LOOP_FIELD_HEIGHT)),
-			Vec2(200, 2000),
+			Vec2(200, 1000),
 			Vec2(Random(0.0, 2.0), Random(-2.0, 2.0)),
 			*_travelDirection,
 			200U,
@@ -50,14 +50,14 @@ void Game::init()
 	_uiManager.addUI(std::make_shared<LimitTimer>(_limitTime));
 	_uiManager.addUI(std::make_shared<ReturnTitle>(_returnTitleFlag));
 	
-	const int32 ENEMY_SIZE = 100;
+	const int32 ENEMY_SIZE = 60;
 	Texture text = Texture(L"images/Enemy.png");
 	for (int i = 0; i < ENEMY_SIZE; i++) {
 		_spObjectManager->addObject(std::make_shared<EnemyMaker>(
 			_spObjectGraphManager, _spObjectManager, _field->getSize(), _score,
 			EnemyParam(
 				text,
-				Vec2(Random(0, LOOP_FIELD_WIDTH), Random(0, LOOP_FIELD_HEIGHT)),
+				Vec2(Random(0, LOOP_FIELD_WIDTH), Random(WINDOW_HEIGHT, LOOP_FIELD_HEIGHT)),
 				Vec2(Random(0.0, 2.0), Random(-2.0, 2.0))
 			),
 			_travelDirection));
@@ -75,6 +75,7 @@ void Game::init()
 
 void Game::update()
 {
+
 	if (_goResultCount) {
 		if(_goResultCount == 85) changeScene(L"Result", 100);
 		++_goResultCount;
@@ -120,8 +121,9 @@ void Game::update()
 			_field->transform(_spPlayer->getPosition(), *_travelDirection);
 			_directionCache = *_travelDirection;
 			_spPlayer->rotateStart(*_travelDirection);
-			_tranformCount = CHANGE_DIRECTION_TIME;
+			//if (_directionCache.x != _travelDirection->x && _directionCache.y != _travelDirection->y) {
 			_uiManager.transformStart(_field->getGoalSize(), *_travelDirection);
+			_tranformCount = CHANGE_DIRECTION_TIME;
 		}
 		if (_tranformCount) {
 			_spPlayer->rotate(_tranformCount);
